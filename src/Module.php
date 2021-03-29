@@ -61,6 +61,9 @@ class Module {
                     $oDbAdapter = $container->get(AdapterInterface::class);
                     $oBuildTbl = new TableGateway('testing_test', $oDbAdapter);
                     $aPluginTbls = [];
+                    $aPluginTbls['testing-user'] = new TableGateway('testing_test_user', $oDbAdapter);
+                    $aPluginTbls['testing-step'] = new TableGateway('testing_test_task', $oDbAdapter);
+
                     return new Controller\BackendController(
                         $oDbAdapter,
                         $oBuildTbl,

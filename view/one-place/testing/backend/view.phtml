@@ -1,0 +1,94 @@
+<?php
+?>
+<div class="row">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-header">
+                <h1 class="card-title">Test: <?=$oTest->label?></h1>
+            </div>
+            <div class="card-header">
+            <?php if($oTest->type == 'androidapp') { ?>
+                <i class="fab fa-android"></i> <a href="<?=$oTest->href?>" target="_blank">
+                    <?=basename($oTest->href)?>
+                </a>
+            <?php } ?>
+            </div>
+            <div class="card-body">
+                <h2>Testfälle (<?=count($aSteps)?>)</h2>
+                <ul class="list-group">
+                    <li class="list-group-item">
+                        <div class="row">
+                            <div class="col-md-3">
+                                <b>Testfall</b>
+                            </div>
+                            <div class="col-md-1">
+                                <b>Erledigt</b>
+                            </div>
+                            <div class="col-md-1">
+                                <b>Resultat</b>
+                            </div>
+                            <div class="col-md-3">
+                                <b>Beschreibung</b>
+                            </div>
+                            <div class="col-md-3">
+                                <b>Kommentar</b>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+                <ul class="list-group">
+                    <?php foreach($aSteps as $oStep) { ?>
+                        <li class="list-group-item">
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <?=$oStep->description?>
+                                </div>
+                                <div class="col-md-1">
+                                    <?=($oStep->is_done == 1) ? '<i class="fas fa-check text-success"></i>' : ''?>
+                                </div>
+                                <div class="col-md-1">
+                                    <?php
+                                    if($oStep->is_done == 1) {
+                                        switch($oStep->result_type_idfs) {
+                                            case 0:
+                                                echo '<i class="fas fa-check text-success" title="mängelfrei"></i>';
+                                                break;
+                                            case 1:
+                                                echo '<i class="fas fa-check text-warning" title="belangloser Mangel"></i>';
+                                                break;
+                                            case 2:
+                                                echo '<i class="fas fa-times text-dark" title="leichter Mangel"></i>';
+                                                break;
+                                            case 3:
+                                                echo '<i class="fas fa-times text-warning" title="schwerer Mangel"></i>';
+                                                break;
+                                            case 4:
+                                                echo '<i class="fas fa-times text-danger" title="kritischer Mangel"></i>';
+                                                break;
+                                            default:
+                                                break;
+                                        }
+                                    }
+                                    ?>
+                                </div>
+                                <div class="col-md-3">
+                                    <?=$oStep->result_description?>
+                                </div>
+                                <div class="col-md-3">
+                                    <?=$oStep->result_comment?>
+                                </div>
+                            </div>
+                        </li>
+                    <?php } ?>
+                </ul>
+            </div>
+            <div class="card-footer">
+                <?php if($oTest->state == 'open') { ?>
+                <a href="/testing/start/<?=$oTest->Test_ID?>" class="btn btn-success btn-lg">
+                    Test starten
+                </a>
+                <?php } ?>
+            </div>
+        </div>
+    </div>
+</div>

@@ -15,7 +15,7 @@
 
 declare(strict_types=1);
 
-namespace OOnePlace\Testing;
+namespace OnePlace\Testing\Controller;
 
 use Application\Controller\CoreUpdateController;
 use Application\Model\CoreEntityModel;

@@ -1,3 +1,28 @@
 <?php
 ?>
-<h1>Testing</h1>
+
+<div class="row">
+    <div class="col-md-4">
+        <div class="card">
+            <div class="card-header">
+                <h2 class="card-title">Meine offenen Tests</h2>
+            </div>
+            <div class="card-body p-0 b-0">
+                <ul class="list-group">
+                    <?php
+                    if(count($aMyOpenTests) > 0) {
+                        foreach($aMyOpenTests as $oOpenTest) { ?>
+                            <li class="list-group-item">
+                                <a href="/testing/view/<?=$oOpenTest->Test_ID?>">
+                                    <?=$oOpenTest->label?>
+                                </a>
+                            </li>
+                    <?php
+                        }
+                    }
+                    ?>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>

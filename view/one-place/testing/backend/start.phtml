@@ -1,0 +1,116 @@
+<?php
+$iStepsPercent = round(100/($iAllSteps/$iStepsDone),2);
+?>
+<form action="" method="POST">
+    <input type="hidden" name="step_id" value="<?=$oNextStep->Task_ID?>" />
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header">
+                    <h1 class="card-title">Test: <?=$oTest->label?></h1>
+                </div>
+                <div class="card-header">
+                    <div class="progress">
+                        <div class="progress-bar" role="progressbar" style="width: <?=$iStepsPercent?>%" aria-valuenow="<?=$iStepsDone?>" aria-valuemin="0" aria-valuemax="<?=$iAllSteps?>">
+                            <?=$iStepsDone.'/'.$iAllSteps?>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-header">
+                    <h3 class="card-title">Testfall <?=$iStepsDone?> : <?=$oNextStep->description?></h3>
+                </div>
+                <?php if($oNextStep->show_url == 1) { ?>
+                <div class="card-header">
+                    <div class="row">
+                        <div class="col-md-2">
+                            <b>Installationsdatei</b>
+                        </div>
+                        <div class="col-md-10">
+                            <?php if($oTest->type == 'androidapp') { ?>
+                                <i class="fab fa-android"></i> <a href="<?=$oTest->href?>" target="_blank">
+                                    <?=basename($oTest->href)?>
+                                </a>
+                            <?php } ?>
+                        </div>
+                    </div>
+                </div>
+                <?php } ?>
+                <div class="card-header">
+                    <div class="row">
+                        <div class="col-md-2">
+                            <b>Voraussetzungen</b>
+                        </div>
+                        <div class="col-md-10">
+                            <?=$oNextStep->requirements?>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-header">
+                    <div class="row">
+                        <div class="col-md-2">
+                            <b>Testschritte</b>
+                        </div>
+                        <div class="col-md-10">
+                            <?=$oNextStep->steps?>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-header">
+                    <div class="row">
+                        <div class="col-md-2">
+                            <b>Erwartetes Ergebnis</b>
+                        </div>
+                        <div class="col-md-10">
+                            <?=$oNextStep->expected_result?>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-header">
+                    <h3>Testresultat</h3>
+                </div>
+                <div class="card-header">
+                    <div class="row">
+                        <div class="col-md-2">
+                            <b>Mängelklasse</b>
+                        </div>
+                        <div class="col-md-10">
+                            <select class="form-control" name="result_type">
+                                <option value="0">mängelfrei</option>
+                                <option value="1">belangloser Mangel</option>
+                                <option value="2">leichter Mangel</option>
+                                <option value="3">schwerer Mangel</option>
+                                <option value="4">kritischer Mangel</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-header">
+                    <div class="row">
+                        <div class="col-md-2">
+                            <b>Mangelbeschreibung</b>
+                        </div>
+                        <div class="col-md-10">
+                            <textarea class="form-control" rows="8" name="result_description"></textarea>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-header">
+                    <div class="row">
+                        <div class="col-md-2">
+                            <b>Bemerkungen</b>
+                        </div>
+                        <div class="col-md-10">
+                            <textarea class="form-control" rows="3" name="result_comment"></textarea>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <button type="submit" class="btn btn-success btn-lg">
+                        Zum nächsten Testfall
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</form>
